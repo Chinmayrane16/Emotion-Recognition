@@ -3,13 +3,13 @@ import cv2
 from PIL import Image,ImageEnhance
 import numpy as np 
 import os
-from model import FacialExpressionModel
+from my_model.model import FacialExpressionModel
 import time
 
 #importing the cnn model+using the CascadeClassifier to use features at once to check if a window is not a face region
 st.set_option('deprecation.showfileUploaderEncoding', False)
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-model = FacialExpressionModel("model.json", "model_weights.h5")
+face_cascade = cv2.CascadeClassifier('frecog/haarcascade_frontalface_default.xml')
+model = FacialExpressionModel("my_model/model.json", "my_model/model_weights.h5")
 font = cv2.FONT_HERSHEY_SIMPLEX 
 
 #face exp detecting function
