@@ -1,6 +1,6 @@
 # Emotion-Recognition Web Application With Streamlit 
 A CNN based Tensorflow implementation on facial expression recognition (FER2013 dataset), achieving 66,72% accuracy 
-![](model.png)
+![](images/model.png)
 
 ### Dependencies:
 - python 3.7<br/>
@@ -26,5 +26,5 @@ The separated dataset is already available to download in the two folders train 
 - Run the app.py file : `streamlit run app.py"`
 
 ### Demos:
-![](demo.PNG)
+![](images/demo.PNG)
 
