@@ -3,8 +3,9 @@ import cv2
 from PIL import Image,ImageEnhance
 import numpy as np 
 import os
-from my_model.model import FacialExpressionModel
+from model import FacialExpressionModel
 import time
+from bokeh.models.widgets import Div
 
 #importing the cnn model+using the CascadeClassifier to use features at once to check if a window is not a face region
 st.set_option('deprecation.showfileUploaderEncoding', False)
@@ -22,13 +23,12 @@ def detect_faces(our_image):
 	# Draw rectangle around the faces
 	for (x, y, w, h) in faces:
 
-                fc = gray[y:y+h, x:x+w]
-
-                roi = cv2.resize(fc, (48, 48))
-                pred = model.predict_emotion(roi[np.newaxis, :, :, np.newaxis])
-                cv2.putText(img, pred, (x, y), font, 1, (255, 255, 0), 2)
-                cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
-                return img,faces 
+			fc = gray[y:y+h, x:x+w]
+			roi = cv2.resize(fc, (48, 48))
+			pred = model.predict_emotion(roi[np.newaxis, :, :, np.newaxis])
+			cv2.putText(img, pred, (x, y), font, 1, (255, 255, 0), 2)
+			cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
+			return img,faces,pred 
 
 #cartonizing_image function
 def cartonize_image(our_image):
@@ -53,18 +53,37 @@ def cannize_image(our_image):
 	canny = cv2.Canny(img, 100, 150)
 	return canny
 #the main function	
+
 def main():
 	
 	"""Face Expression Detection App"""
 	#setting the app title & sidebar
 
-	st.title("Face Expressiopn Detection Web Application")
-	st.text("Built with Streamlit and OpenCV")
+	st.title("Face  Expression  Detection Application")
 
-	activities = ["Detect your Facial expressions" ,"About"]
+	st.markdown(":smile: :worried: :fearful: :rage: :hushed:") 
+	#st.text("Built with Streamlit and OpenCV")
+
+	activities = ["Home","Detect your Facial expressions" ,"CNN Model Performance","About"]
 	choice = st.sidebar.selectbox("Select Activity",activities)
+	#using Html and Css for home page
+	if choice == 'Home':
+		html_temp = """
+		<div style=" 
+					background-image: linear-gradient(to right, #FBCEB1, #733635);
+					width: 700px;
+					height:500px;
+					border-radius: 25px;
+					opacity:0.2;">
+		</div><br>
+		"""
+	
+		st.markdown(html_temp, unsafe_allow_html=True)
 
+	if choice == 'CNN Model Performance':
+		st.image('model.png', width=850)
 	#if choosing the first choice on sidebar , give access to upload the image 
+			
 
 	if choice == 'Detect your Facial expressions':
 		st.subheader("Face Detection")
@@ -88,6 +107,7 @@ def main():
 		feature_choice = st.sidebar.selectbox("Find Features",task)
 		if st.button("Process"):
 			if feature_choice == 'Faces':
+
 				#process bar
 				progress = st.progress(0)
 				for i in range(100):
@@ -95,12 +115,39 @@ def main():
 					progress.progress(i+1)
 				#end of process bar
 				
-				result_img,result_faces = detect_faces(our_image)
-				st.image(result_img)
-
-				st.success("Found {} faces".format(len(result_faces)))
-			
-		
+				result_img,result_faces,prediction = detect_faces(our_image)
+				if st.image(result_img) :
+					st.success("Found {} faces".format(len(result_faces)))
+					#recommended youtube videos for the user
+					if prediction == 'Happy':
+						st.subheader("YeeY!  You are Happy :smile: today , Always Be ! ")
+						st.text("Here is your Recommended video to watch:")
+						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+					elif prediction == 'Angry':
+						st.subheader("You seem to be angry :rage: today ,Take it easy! ")
+						st.text("Here is your Recommended video to watch:")
+						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+					elif prediction == 'Disgust':
+						st.subheader("You seem to be Disgust :rage: today ,Take it easy! ")
+						st.text("Here is your Recommended video to watch:")
+						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+					elif prediction == 'Fear':
+						st.subheader("You seem to be Fearful :fearful: today ,Be couragous! ")
+						st.text("Here is your Recommended video to watch:")
+						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+					elif prediction == 'Neutral':
+						st.subheader("You seem to be Neutral :neutral: today ,Happy day ")
+						st.text("Here is your Recommended video to watch:")
+						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+					elif prediction == 'Sad':
+						st.subheader("You seem to be Sad :sad: today ,Smile and be happy! ")
+						st.text("Here is your Recommended video to watch:")
+						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+					elif prediction == 'Surprise':
+						st.subheader("You seem to be surprised :surprise: today ! ")
+						st.text("Here is your Recommended video to watch:")
+						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+				
 			# elif feature_choice == 'Cartonize':
 			# 	result_img = cartonize_image(our_image)
 			# 	st.image(result_img)
@@ -110,11 +157,7 @@ def main():
 			# 	st.image(result_canny)
 	
 
-
 	elif choice == 'About':
 		st.subheader("About Face Expression Detection App")
 		
-
-
-if __name__ == '__main__':
-		main()	
+main()	
