@@ -29,29 +29,6 @@ def detect_faces(our_image):
 			cv2.putText(img, pred, (x, y), font, 1, (255, 255, 0), 2)
 			cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
 			return img,faces,pred 
-
-#cartonizing_image function
-def cartonize_image(our_image):
-	new_img = np.array(our_image.convert('RGB'))
-	img = cv2.cvtColor(new_img,1)
-	gray = cv2.cvtColor(new_img, cv2.COLOR_BGR2GRAY)
-	# Edges
-	gray = cv2.medianBlur(gray, 5)
-	edges = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 9, 9)
-	#Color
-	color = cv2.bilateralFilter(img, 9, 300, 300)
-	#Cartoon
-	cartoon = cv2.bitwise_and(color, color, mask=edges)
-
-	return cartoon
-
-#cannizing_image function
-def cannize_image(our_image):
-	new_img = np.array(our_image.convert('RGB'))
-	img = cv2.cvtColor(new_img,1)
-	img = cv2.GaussianBlur(img, (11, 11), 0)
-	canny = cv2.Canny(img, 100, 150)
-	return canny
 #the main function	
 
 def main():
@@ -59,14 +36,15 @@ def main():
 	"""Face Expression Detection App"""
 	#setting the app title & sidebar
 
-	st.title("Face  Expression  Detection Application")
+	st.title("Face  Expression  Detection Application ")
 
 	st.markdown(":smile: :worried: :fearful: :rage: :hushed:") 
+
 	#st.text("Built with Streamlit and OpenCV")
 
 	activities = ["Home","Detect your Facial expressions" ,"CNN Model Performance","About"]
 	choice = st.sidebar.selectbox("Select Activity",activities)
-	#using Html and Css for home page
+
 	if choice == 'Home':
 		html_temp = """
 		<div style=" 
@@ -80,9 +58,21 @@ def main():
 	
 		st.markdown(html_temp, unsafe_allow_html=True)
 
+	#if choosing to consult the cnn model performance
+
 	if choice == 'CNN Model Performance':
-		st.image('model.png', width=850)
-	#if choosing the first choice on sidebar , give access to upload the image 
+		st.subheader("CNN Model :")
+		st.image('images/model.png', width=700)
+		st.subheader("FER2013 Dataset from:")
+		st.text(" https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data")
+		st.image('images/dataframe.png', width=700)
+		st.subheader("Model training results:")
+		st.markdown("Accuracy :chart_with_upwards_trend: :")
+		st.image("images/accuracy.png")
+		st.markdown("Loss :chart_with_downwards_trend: : ")
+		st.image("images/loss.png")
+
+	#if choosing to detect your face exp , give access to upload the image 
 			
 
 	if choice == 'Detect your Facial expressions':
@@ -108,17 +98,14 @@ def main():
 		if st.button("Process"):
 			if feature_choice == 'Faces':
 
-				#process bar
 				progress = st.progress(0)
 				for i in range(100):
 					time.sleep(0.05)
 					progress.progress(i+1)
-				#end of process bar
-				
 				result_img,result_faces,prediction = detect_faces(our_image)
 				if st.image(result_img) :
 					st.success("Found {} faces".format(len(result_faces)))
-					#recommended youtube videos for the user
+
 					if prediction == 'Happy':
 						st.subheader("YeeY!  You are Happy :smile: today , Always Be ! ")
 						st.text("Here is your Recommended video to watch:")
@@ -148,16 +135,7 @@ def main():
 						st.text("Here is your Recommended video to watch:")
 						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
 				
-			# elif feature_choice == 'Cartonize':
-			# 	result_img = cartonize_image(our_image)
-			# 	st.image(result_img)
-
-			# elif feature_choice == 'Cannize':
-			# 	result_canny = cannize_image(our_image)
-			# 	st.image(result_canny)
-	
-
 	elif choice == 'About':
 		st.subheader("About Face Expression Detection App")
-		
+
 main()	
