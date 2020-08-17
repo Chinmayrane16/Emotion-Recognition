@@ -11,13 +11,13 @@ A CNN based Tensorflow implementation on facial expression recognition (FER2013 
 - Dataset from https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data<br/>
 - Image Properties: 48 x 48 pixels (2304 bytes)<br/>
 - Labels: 
->> 0 - Angry </br>
->> 1 - Disgust<br/>
->> 2 - Fear<br/>
->> 3 - Happy<br/>
->> 4 - Sad<br/>
->> 5 - Surprise<br/>
->> 6 - Neutral<br/>
+> * 0 - Angry </br>
+> * 1 - Disgust<br/>
+> * 2 - Fear<br/>
+> * 3 - Happy<br/>
+> * 4 - Sad<br/>
+> * 5 - Surprise<br/>
+> * 6 - Neutral<br/>
 - The training set consists of 28,708 examples.<br/>
 - The model is represented as a json file :model.json
 
