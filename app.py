@@ -57,19 +57,17 @@ def main():
 		st.title("Face Expression WEB Application :")
 		st.subheader(":smile: :worried: :fearful: :rage: :hushed:")
 		st.subheader("CNN Model :")
-		st.image('model.png', width=700)
+		st.image('images/model.png', width=700)
 		st.subheader("FER2013 Dataset from:")
 		st.text(" https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data")
-		st.image('dataframe.png', width=700)
+		st.image('images/dataframe.png', width=700)
 		st.subheader("Model training results:")
 		st.markdown("Accuracy :chart_with_upwards_trend: :")
-		st.image("accuracy.png")
+		st.image("images/accuracy.png")
 		st.markdown("Loss :chart_with_downwards_trend: : ")
-		st.image("loss.png")
-
-	#if choosing to detect your face exp , give access to upload the image 
-			
-
+		st.image("images/loss.png")
+	#if choosing to detect your face exp , give access to upload the image
+	
 	if choice == 'Detect your Facial expressions':
 		st.title("Face Expression WEB Application :")
 		st.subheader(":smile: :worried: :fearful: :rage: :hushed:")
