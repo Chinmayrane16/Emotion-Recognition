@@ -28,7 +28,7 @@ The separated dataset is already available to download in the two folders train 
 - Install virtual environment : `pip install virtualenv` </br>
 - Create virtual environment : `virutalenv venv` </br>
 - Activate the virtual environment : `source venv/bin/activate` </br>
-- Install dependencies requirements.txt : `pip install -r requirements.txt`</br>
+- Install dependencies in requirements.txt : `pip install -r requirements.txt`</br>
 - Install Streamlit : `pip install streamlit` <br/>
 - Run the app.py file : `streamlit run app.py"`
 
