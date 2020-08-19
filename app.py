@@ -36,48 +36,43 @@ def main():
 	"""Face Expression Detection App"""
 	#setting the app title & sidebar
 
-	st.title("Face  Expression  Detection Application ")
-
-	st.markdown(":smile: :worried: :fearful: :rage: :hushed:") 
-
-	#st.text("Built with Streamlit and OpenCV")
-
 	activities = ["Home","Detect your Facial expressions" ,"CNN Model Performance","About"]
 	choice = st.sidebar.selectbox("Select Activity",activities)
 
 	if choice == 'Home':
 		html_temp = """
-		<div style=" 
-					background-image: linear-gradient(to right, #FBCEB1, #733635);
-					width: 700px;
-					height:500px;
-					border-radius: 25px;
-					opacity:0.2;">
-		</div><br>
+			
+		<marquee behavior="scroll" direction="left" width="100%;">
+		<h2 style= "color: #000000; font-family: 'Raleway',sans-serif; font-size: 62px; font-weight: 800; line-height: 72px; margin: 0 0 24px; text-align: center; text-transform: uppercase;">Try your own test! </h2>
+		</marquee><br>
 		"""
-	
 		st.markdown(html_temp, unsafe_allow_html=True)
-
+		st.subheader("Video Demo :")
+		st.subheader(":smile: :worried: :fearful: :rage: :hushed:")
+		st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+		
 	#if choosing to consult the cnn model performance
 
 	if choice == 'CNN Model Performance':
+		st.title("Face Expression WEB Application :")
+		st.subheader(":smile: :worried: :fearful: :rage: :hushed:")
 		st.subheader("CNN Model :")
-		st.image('images/model.png', width=700)
+		st.image('model.png', width=700)
 		st.subheader("FER2013 Dataset from:")
 		st.text(" https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data")
-		st.image('images/dataframe.png', width=700)
+		st.image('dataframe.png', width=700)
 		st.subheader("Model training results:")
 		st.markdown("Accuracy :chart_with_upwards_trend: :")
-		st.image("images/accuracy.png")
+		st.image("accuracy.png")
 		st.markdown("Loss :chart_with_downwards_trend: : ")
-		st.image("images/loss.png")
+		st.image("loss.png")
 
 	#if choosing to detect your face exp , give access to upload the image 
 			
 
 	if choice == 'Detect your Facial expressions':
-		st.subheader("Face Detection")
-
+		st.title("Face Expression WEB Application :")
+		st.subheader(":smile: :worried: :fearful: :rage: :hushed:")
 		image_file = st.file_uploader("Upload Image",type=['jpg','png','jpeg'])
     
 	#if image if uploaded,display the progress bar +the image
@@ -93,15 +88,18 @@ def main():
 			st.error("No image uploaded yet")
 
 		# Face Detection
-		task = ["Faces","Cannize","Cartonize"]
+		task = ["Faces"]
 		feature_choice = st.sidebar.selectbox("Find Features",task)
 		if st.button("Process"):
 			if feature_choice == 'Faces':
 
+				#process bar
 				progress = st.progress(0)
 				for i in range(100):
 					time.sleep(0.05)
 					progress.progress(i+1)
+				#end of process bar
+				
 				result_img,result_faces,prediction = detect_faces(our_image)
 				if st.image(result_img) :
 					st.success("Found {} faces".format(len(result_faces)))
@@ -136,6 +134,8 @@ def main():
 						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
 				
 	elif choice == 'About':
+		st.title("Face Expression WEB Application :")
+		st.subheader(":smile: :worried: :fearful: :rage: :hushed:")
 		st.subheader("About Face Expression Detection App")
 
 main()	
