@@ -105,31 +105,32 @@ def main():
 					if prediction == 'Happy':
 						st.subheader("YeeY!  You are Happy :smile: today , Always Be ! ")
 						st.text("Here is your Recommended video to watch:")
-						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+						st.video("https://www.youtube.com/watch?v=4q1dgn_C0AU&t=24s")
 					elif prediction == 'Angry':
 						st.subheader("You seem to be angry :rage: today ,Take it easy! ")
 						st.text("Here is your Recommended video to watch:")
-						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+						st.video("https://www.youtube.com/watch?v=d_5DU5opOFk")
 					elif prediction == 'Disgust':
-						st.subheader("You seem to be Disgust :rage: today ,Take it easy! ")
+						st.subheader("You seem to be Disgust :rage: today! ")
 						st.text("Here is your Recommended video to watch:")
-						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+						#st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
 					elif prediction == 'Fear':
 						st.subheader("You seem to be Fearful :fearful: today ,Be couragous! ")
 						st.text("Here is your Recommended video to watch:")
-						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+						st.video("https://www.youtube.com/watch?v=h_D6HhWiTiI")
 					elif prediction == 'Neutral':
-						st.subheader("You seem to be Neutral :neutral: today ,Happy day ")
+						st.subheader("You seem to be Neutral today ,Happy day! ")
 						st.text("Here is your Recommended video to watch:")
-						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+						#st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
 					elif prediction == 'Sad':
 						st.subheader("You seem to be Sad :sad: today ,Smile and be happy! ")
 						st.text("Here is your Recommended video to watch:")
-						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+						st.video("https://www.youtube.com/watch?v=ST97BGCi3-w")
 					elif prediction == 'Surprise':
-						st.subheader("You seem to be surprised :surprise: today ! ")
+						st.subheader("You seem to be surprised today ! ")
 						st.text("Here is your Recommended video to watch:")
-						st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+						#st.video("https://www.youtube.com/watch?v=M1uyH-DzjGE&t=46s")
+					else :st.error("Your image does not match the training dataset's images! Try an other image!")
 				
 	elif choice == 'About':
 		st.title("Face Expression WEB Application :")
